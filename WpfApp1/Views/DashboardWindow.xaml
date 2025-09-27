@@ -1,0 +1,261 @@
+<Window x:Class="WpfApp1.Views.DashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Disaster Alleviation Foundation - Dashboard" 
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+    
+    <Window.Resources>
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" 
+                                    Opacity="0.1" 
+                                    BlurRadius="10" 
+                                    ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#45A049"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#3D8B40"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#2196F3" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="🌍 Disaster Alleviation Foundation" 
+                              FontSize="24" 
+                              FontWeight="Bold" 
+                              Foreground="White"/>
+                    <TextBlock Text="Welcome, {Binding CurrentUser.FullName}" 
+                              FontSize="16" 
+                              Foreground="#E3F2FD" 
+                              Margin="0,5,0,0"/>
+                </StackPanel>
+                
+                <Button Grid.Column="1" 
+                       Content="Logout" 
+                       Command="{Binding LogoutCommand}" 
+                       Background="#FF5722" 
+                       Foreground="White" 
+                       BorderThickness="0" 
+                       Padding="15,8" 
+                       FontSize="14" 
+                       FontWeight="SemiBold" 
+                       Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                    CornerRadius="6" 
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#E64A19"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+        
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="30">
+                
+                <!-- Welcome Card -->
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="🎯 Mission Statement" 
+                                  FontSize="20" 
+                                  FontWeight="Bold" 
+                                  Foreground="#333" 
+                                  Margin="0,0,0,15"/>
+                        <TextBlock Text="Our mission is to provide immediate relief and long-term support to communities affected by natural disasters, helping them rebuild and recover stronger than before." 
+                                  FontSize="16" 
+                                  Foreground="#666" 
+                                  TextWrapping="Wrap" 
+                                  LineHeight="24"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Action Cards -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Volunteer Card -->
+                    <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,15,0">
+                        <StackPanel>
+                            <TextBlock Text="🤝" FontSize="40" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                            <TextBlock Text="Volunteer" 
+                                      FontSize="18" 
+                                      FontWeight="Bold" 
+                                      Foreground="#333" 
+                                      HorizontalAlignment="Center" 
+                                      Margin="0,0,0,10"/>
+                            <TextBlock Text="Join our volunteer network and make a direct impact in disaster-affected communities." 
+                                      FontSize="14" 
+                                      Foreground="#666" 
+                                      TextWrapping="Wrap" 
+                                      TextAlignment="Center" 
+                                      Margin="0,0,0,20"/>
+                            <Button Content="Become a Volunteer" 
+                                   Style="{StaticResource ActionButton}" 
+                                   HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Donate Card -->
+                    <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="7.5,0">
+                        <StackPanel>
+                            <TextBlock Text="💝" FontSize="40" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                            <TextBlock Text="Donate" 
+                                      FontSize="18" 
+                                      FontWeight="Bold" 
+                                      Foreground="#333" 
+                                      HorizontalAlignment="Center" 
+                                      Margin="0,0,0,10"/>
+                            <TextBlock Text="Your financial support helps us provide essential supplies and services to those in need." 
+                                      FontSize="14" 
+                                      Foreground="#666" 
+                                      TextWrapping="Wrap" 
+                                      TextAlignment="Center" 
+                                      Margin="0,0,0,20"/>
+                            <Button Content="Make a Donation" 
+                                   Style="{StaticResource ActionButton}" 
+                                   HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Emergency Card -->
+                    <Border Grid.Column="2" Style="{StaticResource CardStyle}" Margin="15,0,0,0">
+                        <StackPanel>
+                            <TextBlock Text="🚨" FontSize="40" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                            <TextBlock Text="Emergency Response" 
+                                      FontSize="18" 
+                                      FontWeight="Bold" 
+                                      Foreground="#333" 
+                                      HorizontalAlignment="Center" 
+                                      Margin="0,0,0,10"/>
+                            <TextBlock Text="Report emergencies and access real-time disaster response information and resources." 
+                                      FontSize="14" 
+                                      Foreground="#666" 
+                                      TextWrapping="Wrap" 
+                                      TextAlignment="Center" 
+                                      Margin="0,0,0,20"/>
+                            <Button Content="Report Emergency" 
+                                   Background="#FF5722" 
+                                   Style="{StaticResource ActionButton}" 
+                                   HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                
+                <!-- Recent Activity -->
+                <Border Style="{StaticResource CardStyle}" Margin="0,30,0,0">
+                    <StackPanel>
+                        <TextBlock Text="📊 Recent Activity" 
+                                  FontSize="20" 
+                                  FontWeight="Bold" 
+                                  Foreground="#333" 
+                                  Margin="0,0,0,20"/>
+                        
+                        <StackPanel>
+                            <Border Background="#E8F5E8" 
+                                   BorderBrush="#4CAF50" 
+                                   BorderThickness="1" 
+                                   CornerRadius="8" 
+                                   Padding="15" 
+                                   Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="✅" FontSize="16" Margin="0,0,10,0"/>
+                                    <StackPanel>
+                                        <TextBlock Text="Account Created Successfully" 
+                                                  FontWeight="SemiBold" 
+                                                  Foreground="#2E7D32"/>
+                                        <TextBlock Text="Welcome to the Disaster Alleviation Foundation community!" 
+                                                  FontSize="12" 
+                                                  Foreground="#4CAF50"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="#FFF3E0" 
+                                   BorderBrush="#FF9800" 
+                                   BorderThickness="1" 
+                                   CornerRadius="8" 
+                                   Padding="15">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="ℹ️" FontSize="16" Margin="0,0,10,0"/>
+                                    <StackPanel>
+                                        <TextBlock Text="Complete Your Profile" 
+                                                  FontWeight="SemiBold" 
+                                                  Foreground="#E65100"/>
+                                        <TextBlock Text="Add more details to your profile to access additional features." 
+                                                  FontSize="12" 
+                                                  Foreground="#FF9800"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
