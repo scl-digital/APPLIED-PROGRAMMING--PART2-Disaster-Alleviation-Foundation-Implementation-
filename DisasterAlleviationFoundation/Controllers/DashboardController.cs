@@ -46,8 +46,7 @@ namespace DisasterAlleviationFoundation.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            TempData["InfoMessage"] = "Thank you for your interest in volunteering! Our team will contact you soon with opportunities.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Volunteer");
         }
 
         [HttpPost]
@@ -59,8 +58,7 @@ namespace DisasterAlleviationFoundation.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            TempData["InfoMessage"] = "Thank you for your generous donation! You will be redirected to our secure payment portal.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Donate", "Donation");
         }
 
         [HttpPost]
@@ -72,8 +70,7 @@ namespace DisasterAlleviationFoundation.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            TempData["WarningMessage"] = "Emergency report submitted. Our response team has been notified and will contact you shortly.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Report", "Incident");
         }
 
         private List<ActivityItem> GetRecentActivities(User user)

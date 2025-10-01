@@ -20,6 +20,9 @@ builder.Services.AddHttpContextAccessor();
 
 // Register custom services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IVolunteerService, VolunteerService>();
+builder.Services.AddScoped<IIncidentService, IncidentService>();
+builder.Services.AddScoped<IDonationService, DonationService>();
 
 var app = builder.Build();
 
